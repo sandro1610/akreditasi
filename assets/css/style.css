@@ -1,0 +1,7 @@
+.header{
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(205,29,253,1) 72%);
+}
+.btn{
+    background-color: #833ab4;
+}
