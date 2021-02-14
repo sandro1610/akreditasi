@@ -3,9 +3,8 @@ include '../includes/conn.php';
 session_start();
 if (empty($_SESSION['nip']) && empty($_SESSION['password']) && empty($_SESSION['id'])) {
   header("Location:../index.php");
-  if ($_SESSION['level'] != 'admin') {
-    header("Location:../user/index.php");
-  }
+}else if ($_SESSION['level'] == 'user') {
+  header("Location:../user/index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -219,24 +218,54 @@ if (empty($_SESSION['nip']) && empty($_SESSION['password']) && empty($_SESSION['
     });
   </script>
   <script language="JavaScript" type="text/javascript">
-    function hapusData_mahasiswa(id) {
+    function hapusData_akreditasi(id) {
       if (confirm("Apakah anda yakin akan menghapus data ini?")) {
-        window.location.href = 'index.php?q=mahasiswa&p=delete&id=' + id;
+        window.location.href = 'index.php?q=akreditasi&p=delete&id=' + id;
       }
     }
-    function hapusData_foto(id) {
+    function hapusData_c1(id) {
       if (confirm("Apakah anda yakin akan menghapus data ini?")) {
-        window.location.href = 'index.php?q=foto&p=delete&id=' + id;
+        window.location.href = 'index.php?q=c1&p=delete&id=' + id;
       }
     }
-    function hapusData_video(id) {
+    function hapusData_c2(id) {
       if (confirm("Apakah anda yakin akan menghapus data ini?")) {
-        window.location.href = 'index.php?q=video&p=delete&id=' + id;
+        window.location.href = 'index.php?q=c2&p=delete&id=' + id;
       }
     }
-    function hapusData_user(id) {
+    function hapusData_c3(id) {
       if (confirm("Apakah anda yakin akan menghapus data ini?")) {
-        window.location.href = 'index.php?q=user&p=delete&id=' + id;
+        window.location.href = 'index.php?q=c3&p=delete&id=' + id;
+      }
+    }
+    function hapusData_c4(id) {
+      if (confirm("Apakah anda yakin akan menghapus data ini?")) {
+        window.location.href = 'index.php?q=c4&p=delete&id=' + id;
+      }
+    }
+    function hapusData_c5(id) {
+      if (confirm("Apakah anda yakin akan menghapus data ini?")) {
+        window.location.href = 'index.php?q=c5&p=delete&id=' + id;
+      }
+    }
+    function hapusData_c6(id) {
+      if (confirm("Apakah anda yakin akan menghapus data ini?")) {
+        window.location.href = 'index.php?q=c6&p=delete&id=' + id;
+      }
+    }
+    function hapusData_c7(id) {
+      if (confirm("Apakah anda yakin akan menghapus data ini?")) {
+        window.location.href = 'index.php?q=c7&p=delete&id=' + id;
+      }
+    }
+    function hapusData_c8(id) {
+      if (confirm("Apakah anda yakin akan menghapus data ini?")) {
+        window.location.href = 'index.php?q=c8&p=delete&id=' + id;
+      }
+    }
+    function hapusData_c9(id) {
+      if (confirm("Apakah anda yakin akan menghapus data ini?")) {
+        window.location.href = 'index.php?q=c9&p=delete&id=' + id;
       }
     }
 

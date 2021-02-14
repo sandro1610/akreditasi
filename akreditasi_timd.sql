@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 12 Feb 2021 pada 16.54
+-- Waktu pembuatan: 15 Feb 2021 pada 00.26
 -- Versi server: 10.4.14-MariaDB
 -- Versi PHP: 7.4.11
 
@@ -39,7 +39,7 @@ CREATE TABLE `c1` (
 --
 
 INSERT INTO `c1` (`id`, `user_id`, `file_c1`, `tgl_upload`) VALUES
-(1, 3, '3 12-Feb-2021 14-25-28.pdf', '2021-02-12');
+(7, 3, '3 14-Feb-2021 23-38-00.pdf', '2021-02-14');
 
 -- --------------------------------------------------------
 
@@ -54,6 +54,13 @@ CREATE TABLE `c2` (
   `tgl_upload` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `c2`
+--
+
+INSERT INTO `c2` (`id`, `user_id`, `file_c2`, `tgl_upload`) VALUES
+(2, 3, '3 14-Feb-2021 23-38-21.pdf', '2021-02-14');
+
 -- --------------------------------------------------------
 
 --
@@ -66,6 +73,13 @@ CREATE TABLE `c3` (
   `file_c3` varchar(255) NOT NULL,
   `tgl_upload` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `c3`
+--
+
+INSERT INTO `c3` (`id`, `user_id`, `file_c3`, `tgl_upload`) VALUES
+(1, 3, '3 14-Feb-2021 23-38-38.pdf', '2021-02-14');
 
 -- --------------------------------------------------------
 
@@ -132,6 +146,13 @@ CREATE TABLE `c8` (
   `tgl_upload` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `c8`
+--
+
+INSERT INTO `c8` (`id`, `user_id`, `file_c8`, `tgl_upload`) VALUES
+(1, 3, '3 14-Feb-2021 23-39-09.pdf', '2021-02-14');
+
 -- --------------------------------------------------------
 
 --
@@ -145,6 +166,13 @@ CREATE TABLE `c9` (
   `tgl_upload` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data untuk tabel `c9`
+--
+
+INSERT INTO `c9` (`id`, `user_id`, `file_c9`, `tgl_upload`) VALUES
+(1, 3, '3 14-Feb-2021 22-36-22.pdf', '2021-02-14');
+
 -- --------------------------------------------------------
 
 --
@@ -153,7 +181,7 @@ CREATE TABLE `c9` (
 
 CREATE TABLE `tb_akreditasi` (
   `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
+  `user_id_akre` int(11) NOT NULL,
   `c1_id` varchar(255) NOT NULL,
   `c2_id` varchar(255) NOT NULL,
   `c3_id` varchar(255) NOT NULL,
@@ -162,9 +190,15 @@ CREATE TABLE `tb_akreditasi` (
   `c6_id` varchar(255) NOT NULL,
   `c7_id` varchar(255) NOT NULL,
   `c8_id` varchar(255) NOT NULL,
-  `c9_id` varchar(255) NOT NULL,
-  `status` int(1) NOT NULL
+  `c9_id` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `tb_akreditasi`
+--
+
+INSERT INTO `tb_akreditasi` (`id`, `user_id_akre`, `c1_id`, `c2_id`, `c3_id`, `c4_id`, `c5_id`, `c6_id`, `c7_id`, `c8_id`, `c9_id`) VALUES
+(5, 3, '7', '2', '1', '', '', '', '', '1', '');
 
 -- --------------------------------------------------------
 
@@ -267,19 +301,19 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT untuk tabel `c1`
 --
 ALTER TABLE `c1`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `c2`
 --
 ALTER TABLE `c2`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT untuk tabel `c3`
 --
 ALTER TABLE `c3`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `c4`
@@ -309,19 +343,19 @@ ALTER TABLE `c7`
 -- AUTO_INCREMENT untuk tabel `c8`
 --
 ALTER TABLE `c8`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `c9`
 --
 ALTER TABLE `c9`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_akreditasi`
 --
 ALTER TABLE `tb_akreditasi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_user`

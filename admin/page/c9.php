@@ -1,11 +1,11 @@
 <div class="card">
   <!-- Card header -->
   <div class="card-header">
-    <h3 class="mb-0">Data c1</h3>
+    <h3 class="mb-0">Data c9</h3>
   </div>
   <div class="container">
     <div class="table-responsive py-4">
-      <table class="table table-flush" id="data-c1">
+      <table class="table table-flush" id="data-c9">
         <thead class="thead-light">
           <tr>
             <th>No</th>
@@ -18,8 +18,8 @@
         </thead>
         <tbody>
           <?php
-          $sql = "SELECT * FROM c1
-                  LEFT JOIN tb_user ON c1.user_id = tb_user.id";
+          $sql = "SELECT * FROM c9
+                  LEFT JOIN tb_user ON c9.user_id = tb_user.id";
           $query = mysqli_query($link, $sql);
           $no = 1;
           while ($hasil = mysqli_fetch_array($query)) :
@@ -28,14 +28,14 @@
               <td><?= $no++; ?></td>
               <td><?= $hasil['nama']; ?></td>
               <td><?= $hasil['nip']; ?></td>
-              <td><?= $hasil['file_c1']; ?></td>
+              <td><?= $hasil['file_c9']; ?></td>
               <td><?= $hasil['tgl_upload']; ?></td>
               <td>
                 <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-form">
                   <i class='fas fa-pencil-alt' style="color: gray;"></i>
                 </button>
                 |
-                <a class="btn btn-sm btn-default" href="javascript:hapusData_c1('<?= $hasil['id']; ?>')">
+                <a class="btn btn-sm btn-default" href="javascript:hapusData_c9('<?= $hasil['id']; ?>')">
                   <i class='fas fa-trash' style="color: red;"></i>
                 </a>
               </td>
@@ -69,9 +69,9 @@ if (isset($_POST["Edit"])) {
       if ($fileSize < 100000000) {
         $date = date('d-M-Y H-i-s');
         $fileNewName = $user_id . ' ' . $date . '.' . $fileActualExt;
-        $fileDestination = '../upload/c1/' . $fileNewName;
+        $fileDestination = '../upload/c9/' . $fileNewName;
         move_uploaded_file($fileTmp_name, $fileDestination);
-        $sql = mysqli_query($link, "UPDATE `c1` SET `file_c1` = '$fileNewName', `tgl_upload` = '$tgl' WHERE `c1`.`id` = $id");
+        $sql = mysqli_query($link, "UPDATE `c9` SET `file_c9` = '$fileNewName', `tgl_upload` = '$tgl' WHERE `c9`.`id` = $id");
         if ($sql) {
              echo "<script>alert('Data Saved Successfully');</script>";
              echo "<script>window.location='?p=dashboard';</script>";

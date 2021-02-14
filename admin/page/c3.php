@@ -1,10 +1,9 @@
 <div class="card">
   <!-- Card header -->
   <div class="card-header">
-    <h3 class="mb-0">Data c3</h3>
+    <h3 class="mb-0">Data C3</h3>
   </div>
   <div class="container">
-    <a class="btn btn-md btn-success" href="report_c3.php" target="_blank">Print</a>
     <div class="table-responsive py-4">
       <table class="table table-flush" id="data-c3">
         <thead class="thead-light">
@@ -19,23 +18,24 @@
         </thead>
         <tbody>
           <?php
-          $sql = "SELECT * FROM c3";
+          $sql = "SELECT * FROM c3
+                  LEFT JOIN tb_user ON c3.user_id = tb_user.id";
           $query = mysqli_query($link, $sql);
           $no = 1;
           while ($hasil = mysqli_fetch_array($query)) :
           ?>
             <tr>
-              <td><?= $no++ ; ?></td>
+              <td><?= $no++; ?></td>
               <td><?= $hasil['nama']; ?></td>
               <td><?= $hasil['nip']; ?></td>
               <td><?= $hasil['file_c3']; ?></td>
               <td><?= $hasil['tgl_upload']; ?></td>
               <td>
-                <a href="#" type="  button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-form<?php echo $hasil['id']; ?>">
+                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-form">
                   <i class='fas fa-pencil-alt' style="color: gray;"></i>
-                </a>
+                </button>
                 |
-                <a class="btn btn-sm btn-default" href="javascript:hapusData_mahasiswa('<?= $hasil['id']; ?>')">
+                <a class="btn btn-sm btn-default" href="javascript:hapusData_c3('<?= $hasil['id']; ?>')">
                   <i class='fas fa-trash' style="color: red;"></i>
                 </a>
               </td>
@@ -46,16 +46,55 @@
     </div>
   </div>
 </div>
+
 <!-- Modal Edit-->
 <?php
-$sql = "SELECT * FROM c3";
-$query = mysqli_query($link, $sql);
-while ($hasil = mysqli_fetch_array($query)) : ?>
-  <div class="modal fade" id="modal-form<?php echo $hasil['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-    <div class="modal-dialog modal- modal-dialog-centered modal-lg" role="document">
+if (isset($_POST["Edit"])) {
+  $tgl = date("Y-m-d");
+  
+  $file = $_FILES['file'];
+  $fileName = $_FILES['file']['name'];
+  $fileTmp_name = $_FILES['file']['tmp_name'];
+  $fileSize = $_FILES['file']['size'];
+  $fileError = $_FILES['file']['error'];
+  $fileType = $_FILES['file']['type'];
+
+  $fileExt = explode('.', $fileName);
+  $fileActualExt = strtolower(end($fileExt));
+
+  $allowed = array('pdf', 'jpg');
+
+  if (in_array($fileActualExt, $allowed)) {
+    if ($fileError === 0) {
+      if ($fileSize < 100000000) {
+        $date = date('d-M-Y H-i-s');
+        $fileNewName = $user_id . ' ' . $date . '.' . $fileActualExt;
+        $fileDestination = '../upload/c3/' . $fileNewName;
+        move_uploaded_file($fileTmp_name, $fileDestination);
+        $sql = mysqli_query($link, "UPDATE `c3` SET `file_c3` = '$fileNewName', `tgl_upload` = '$tgl' WHERE `c3`.`id` = $id");
+        if ($sql) {
+             echo "<script>alert('Data Saved Successfully');</script>";
+             echo "<script>window.location='?p=dashboard';</script>";
+        } else {
+          echo "<script>alert('Data Failed to Save');</script>";
+        }
+      } else {
+        echo "<script>alert('Your file is too big !!');</script>";
+      }
+    } else {
+      echo "<script>alert('Thare is an error in your file !!');</script>";
+    }
+  } else {
+    echo "<script>alert('Sorry, pdf, jpg files are only allowed');</script>";
+  }
+}
+?>
+  <!-- modal edit -->
+  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+    <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title" id="modal-title-default">Edit Mahasiswa</h4>
+          <h4 class="modal-title" id="modal-title-default">Edit</h4>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">×</span>
           </button>
@@ -63,46 +102,14 @@ while ($hasil = mysqli_fetch_array($query)) : ?>
         <div class="modal-body p-0">
           <div class="card bg-secondary shadow border-0">
             <div class="card-body px-lg-5 py-lg-5">
-              <form role="form" method="POST" action="page/edit.php" enctype="multipart/form-data">
-                <input hidden name="id" value="<?php echo $hasil['id']; ?>">
+              <form role="form" method="POST" enctype="multipart/form-data">
                 <div class="form-group row">
-                  <label for="fname" class="col-sm-3 text-left control-label col-form-label">Nama</label>
-                  <div class="col-sm-6">
-                    <input class="form-control" type="text" name="nama" value="<?php echo $hasil['nama']; ?>" id="nama">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="fname" class="col-sm-3 text-left control-label col-form-label">NIM/NPM</label>
-                  <div class="col-sm-6">
-                    <input class="form-control" name="nim" value="<?php echo $hasil['nim']; ?>" type="text">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="lname" class="col-sm-3 text-left control-label col-form-label">Jurusan</label>
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control" name="jurusan" value="<?php echo $hasil['jurusan']; ?>">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="lname" class="col-sm-3 text-left control-label col-form-label">Asal Universitas</label>
-                  <div class="col-sm-6">
-                    <input type="text" class="form-control" name="univ" value="<?php echo $hasil['univ']; ?>">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="lname" class="col-sm-3 text-left control-label col-form-label">Tanggal Masuk</label>
-                  <div class="col-sm-6">
-                    <input type="date" class="form-control" name="tgl_masuk" value="<?php echo $hasil['tgl_masuk']; ?>">
-                  </div>
-                </div>
-                <div class="form-group row">
-                  <label for="lname" class="col-sm-3 text-left control-label col-form-label">Tanggal Keluar</label>
-                  <div class="col-sm-6">
-                    <input type="date" class="form-control" name="tgl_selesai" value="<?php echo $hasil['tgl_selesai']; ?>">
+                  <div class="col-sm-12">
+                    <input type="file" name="file" class="form-control">
                   </div>
                 </div>
                 <div class="text-center">
-                  <button type="Submit" class="btn btn-primary my-4" name="Edit">Edit</button>
+                  <button type="Submit" class="btn btn-primary my-4" name="Edit" data-toggle="modal" data-target="#modal-form">Submit</button>
                 </div>
               </form>
             </div>
@@ -111,4 +118,3 @@ while ($hasil = mysqli_fetch_array($query)) : ?>
       </div>
     </div>
   </div>
-<?php endwhile; ?>

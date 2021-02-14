@@ -25,11 +25,24 @@ if (isset($_POST["Submit"])) {
         $sql = mysqli_query($link, "INSERT INTO c1 (id, user_id, file_c1, tgl_upload) VALUES ( 
               '',
               '$user_id',
-              '$fileNewName',
-              '$tgl')");
+                '$fileNewName',
+                '$tgl')");
         if ($sql) {
-          echo "<script>alert('Data Saved Successfully');</script>";
-          echo "<script>window.location='?p=dashboard';</script>";
+          $select = mysqli_fetch_array(mysqli_query($link, "SELECT id FROM c1 WHERE user_id = '$user_id'"));
+          $query = mysqli_query($link, "SELECT user_id_akre FROM tb_akreditasi WHERE user_id_akre = '$user_id'");
+          $cek = mysqli_num_rows($query);
+          $id_c1 = $select['id'];
+          if ($cek == 1) {
+             $update = mysqli_query($link, "UPDATE `tb_akreditasi` SET `c1_id`= '$id_c1' WHERE user_id_akre = '$user_id'");
+             echo "<script>alert('Data Saved Successfully');</script>";
+             echo "<script>window.location='?p=dashboard';</script>";
+          }elseif ($cek == 0) {
+            $insert = mysqli_query($link, "INSERT INTO tb_akreditasi (id, user_id_akre, c1_id) VALUES ('', '$user_id', '$id_c1')");
+            echo "<script>alert('Data Saved Successfully');</script>";
+            echo "<script>window.location='?p=dashboard';</script>";
+          }else {
+            echo "<script>alert('Data Tidak Masuk');</script>";
+          }
         } else {
           echo "<script>alert('Data Failed to Save');</script>";
         }
@@ -43,8 +56,10 @@ if (isset($_POST["Submit"])) {
     echo "<script>alert('Sorry, pdf, jpg files are only allowed');</script>";
   }
 }
+$query = mysqli_query($link, "SELECT * FROM c1 WHERE user_id = '$user_id'");
+$data=mysqli_fetch_array($query);
+if ($data == NULL) {
 ?>
-
 <div class="card shadow">
   <div class="card-header border-0">
     <div class="row align-items-center">
@@ -53,33 +68,45 @@ if (isset($_POST["Submit"])) {
       </div>
     </div>
   </div>
-  <?php
-  $query = mysqli_query($link, "SELECT * FROM c1 
-                               INNER JOIN tb_user ON c1.user_id = tb_user.id 
-                               WHERE user_id = $user_id");
-  $hasil = mysqli_fetch_array($query);
-  ?>
-  <form class="form-horizontal" method="POST" enctype="multipart/form-data">
-    <div class="card-body">
-      <div class="form-group row">
-        <label for="file" class="col-sm-3 text-left control-label col-form-label">File</label>
-        <div class="col-md-6">
-          <?php if ($query != NULL) { ?>
-            <input type="text" class="form-control" disabled value="<?= $hasil['file_c1'];?>">
-          <?php }else { ?>
-            <input type="file" name="file" class="form-control" accept="application/pdf" />
-          <?php } ?>
-        </div>
+    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+      <div class="card-body">
+              <div class="form-group row">
+                  <label for="file" class="col-sm-3 text-left control-label col-form-label">File</label>
+                  <div class="col-md-6">
+                      <input type="file" name="file" class="form-control">
+                  </div>
+              </div>  
+              <div class="border-top">
+                  <div class="card-body">
+                      <button type="submit" class="btn btn-primary" name="Submit">Submit</button>
+                  </div>
+              </div>
       </div>
-      <div class="border-top">
-        <div class="card-body">
-          <?php if ($query != NULL) { ?>
-            <a class="btn btn-primary" href="../download.php?filename=<?=$hasil['file_c1']?>">Download</a>
-          <?php }else { ?>
-            <button type="submit" class="btn btn-primary" name="Submit">Submit</button>
-          <?php } ?>  
-        </div>
+    </form>
+</div>  
+<?php }else{ ?>
+  <div class="card shadow">
+  <div class="card-header border-0">
+    <div class="row align-items-center">
+      <div class="col">
+        <h3 class="mb-0">File C1</h3>
       </div>
     </div>
-  </form>
+  </div>
+    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+      <div class="card-body">
+              <div class="form-group row">
+                  <label for="file" class="col-sm-3 text-left control-label col-form-label">File</label>
+                  <div class="col-md-6">
+                      <input type="text" name="file" value="<?= $data['file_c1']; ?>" class="form-control">
+                  </div>
+              </div>  
+              <div class="border-top">
+                  <div class="card-body">
+                  <a target="blank" class="btn btn-sm-1 btn-default" href="../upload/c1/<?= $data['file_c1']; ?>">View</a>
+                  </div>
+              </div>
+      </div>
+    </form>
 </div>
+<?php } ?>

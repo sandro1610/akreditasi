@@ -3,9 +3,8 @@ include '../includes/conn.php';
 session_start();
 if (empty($_SESSION['nip']) && empty($_SESSION['password']) && empty($_SESSION['id'])) {
   header("Location:../index.php");
-  if ($_SESSION['level'] == 'admin') {
-    header("Location:../admin/index.php");
-  }
+}else if ($_SESSION['level'] == 'admin') {
+  header("Location:../admin/index.php");
 }
 ?>
 <!DOCTYPE html>
