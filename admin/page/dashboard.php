@@ -19,7 +19,6 @@
             <th>File C7</th>
             <th>File C8</th>
             <th>File C9</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
@@ -51,11 +50,6 @@
               <td><?php if ($hasil['file_c7'] == NULL) { echo "<h5> Belum Upload </h5>";}else{echo $hasil['file_c7'];}?></td>
               <td><?php if ($hasil['file_c8'] == NULL) { echo "<h5> Belum Upload </h5>";}else{echo $hasil['file_c8'];}?></td>
               <td><?php if ($hasil['file_c9'] == NULL) { echo "<h5> Belum Upload </h5>";}else{echo $hasil['file_c9'];}?></td>
-              <td>
-                <a class="btn btn-sm btn-default" href="javascript:hapusData_akreditasi('<?= $hasil['id']; ?>')">
-                  <i class='fas fa-trash' style="color: red;"></i>
-                </a>
-              </td>
             </tr>
           <?php endwhile ?>
         </tbody>

@@ -28,10 +28,10 @@
               <td><?= $no++; ?></td>
               <td><?= $hasil['nama']; ?></td>
               <td><?= $hasil['nip']; ?></td>
-              <td><?= $hasil['file_c1']; ?></td>
+              <td><a target="blank" href="../upload/c1/<?= $hasil['file_c1']; ?>"><?= $hasil['file_c1']; ?></a></td>
               <td><?= $hasil['tgl_upload']; ?></td>
               <td>
-                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-form">
+                <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#modal-form<?php echo $hasil['id']; ?>">
                   <i class='fas fa-pencil-alt' style="color: gray;"></i>
                 </button>
                 |
@@ -51,12 +51,12 @@
 <?php
 if (isset($_POST["Edit"])) {
   $tgl = date("Y-m-d");
-  
+  $id = $_POST['id'];
   $file = $_FILES['file'];
   $fileName = $_FILES['file']['name'];
   $fileTmp_name = $_FILES['file']['tmp_name'];
   $fileSize = $_FILES['file']['size'];
-  $fileError = $_FILES['file']['error'];
+  $fileError = $_FILES['file']['error'];  
   $fileType = $_FILES['file']['type'];
 
   $fileExt = explode('.', $fileName);
@@ -89,8 +89,15 @@ if (isset($_POST["Edit"])) {
   }
 }
 ?>
+<?php
+          $sql = "SELECT * FROM c1
+                  LEFT JOIN tb_user ON c1.user_id = tb_user.id";
+          $query = mysqli_query($link, $sql);
+          $no = 1;
+          while ($hasil = mysqli_fetch_array($query)) :
+          ?>
   <!-- modal edit -->
-  <div class="modal fade" id="modal-form" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
+  <div class="modal fade" id="modal-form<?php echo $hasil['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="modal-form" aria-hidden="true">
     <div class="modal-dialog modal- modal-dialog-centered modal-sm" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -103,6 +110,7 @@ if (isset($_POST["Edit"])) {
           <div class="card bg-secondary shadow border-0">
             <div class="card-body px-lg-5 py-lg-5">
               <form role="form" method="POST" enctype="multipart/form-data">
+              <input hidden type="text" name="id" value="<?php echo $hasil['id']; ?>">
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <input type="file" name="file" class="form-control">
@@ -118,3 +126,4 @@ if (isset($_POST["Edit"])) {
       </div>
     </div>
   </div>
+  <?php endwhile;?>

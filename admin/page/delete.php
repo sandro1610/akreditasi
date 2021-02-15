@@ -3,9 +3,9 @@ if (isset($_GET['q'])) {
     $q = $_GET['q'];
     switch ($q) {
         case 'akreditasi':
-            if (isset($_GET['id'])) {
-                $id     = $_GET['id'];
-                $sql    = "DELETE FROM tb_akreditasi WHERE id='" . $id . "'";
+            if (isset($_GET['user_id_akre'])) {
+                $user_id_akre     = $_GET['user_id_akre'];
+                $sql    = "DELETE FROM tb_akreditasi WHERE user_id_akre ='" . $user_id_akre . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
@@ -19,7 +19,7 @@ if (isset($_GET['q'])) {
         case 'c1':
             if (isset($_GET['id'])) {
                 $id     = $_GET['id'];
-                $sql    = "DELETE FROM c1 WHERE id='" . $id . "'";
+                $sql    = "DELETE FROM c1 WHERE user_id='" . $id . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
@@ -33,7 +33,7 @@ if (isset($_GET['q'])) {
         case 'c2':
             if (isset($_GET['id'])) {
                 $id     = $_GET['id'];
-                $sql    = "DELETE FROM c2 WHERE id='" . $id . "'";
+                $sql    = "DELETE FROM c2 WHERE user_id='" . $id . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
@@ -47,7 +47,7 @@ if (isset($_GET['q'])) {
         case 'c3':
             if (isset($_GET['id'])) {
                 $id     = $_GET['id'];
-                $sql    = "DELETE FROM c3 WHERE id='" . $id . "'";
+                $sql    = "DELETE FROM c3 WHERE user_id='" . $id . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
@@ -61,7 +61,7 @@ if (isset($_GET['q'])) {
         case 'c4':
             if (isset($_GET['id'])) {
                 $id     = $_GET['id'];
-                $sql    = "DELETE FROM c4 WHERE id='" . $id . "'";
+                $sql    = "DELETE FROM c4 WHERE user_id='" . $id . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
@@ -75,7 +75,7 @@ if (isset($_GET['q'])) {
         case 'c5':
             if (isset($_GET['id'])) {
                 $id     = $_GET['id'];
-                $sql    = "DELETE FROM c5 WHERE id='" . $id . "'";
+                $sql    = "DELETE FROM c5 WHERE user_id='" . $id . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
@@ -89,7 +89,7 @@ if (isset($_GET['q'])) {
         case 'c6':
             if (isset($_GET['id'])) {
                 $id     = $_GET['id'];
-                $sql    = "DELETE FROM c6 WHERE id='" . $id . "'";
+                $sql    = "DELETE FROM c6 WHERE user_id='" . $id . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
@@ -103,7 +103,7 @@ if (isset($_GET['q'])) {
         case 'c7':
             if (isset($_GET['id'])) {
                 $id     = $_GET['id'];
-                $sql    = "DELETE FROM c7 WHERE id='" . $id . "'";
+                $sql    = "DELETE FROM c7 WHERE user_id='" . $id . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
@@ -117,7 +117,7 @@ if (isset($_GET['q'])) {
         case 'c8':
             if (isset($_GET['id'])) {
                 $id     = $_GET['id'];
-                $sql    = "DELETE FROM c8 WHERE id='" . $id . "'";
+                $sql    = "DELETE FROM c8 WHERE user_id='" . $id . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
@@ -131,7 +131,7 @@ if (isset($_GET['q'])) {
         case 'c9':
             if (isset($_GET['id'])) {
                 $id     = $_GET['id'];
-                $sql    = "DELETE FROM c9 WHERE id='" . $id . "'";
+                $sql    = "DELETE FROM c9 WHERE user_id='" . $id . "'";
                 $query  = mysqli_query($link, $sql);
                 if ($query) {
                     echo "<script>alert('Data Successfully Deleted');</script>";
